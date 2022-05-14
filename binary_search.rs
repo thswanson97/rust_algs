@@ -1,33 +1,3 @@
-
-
-// fn find_index( arr: &[usize], find: usize) -> Option<usize>
-// {
-//     let length = arr.len();
-//     let half = length / 2;
-//     println!("half at top {}", half);
-//     if arr[half] == find
-//     {
-//         println! ("yay, found {}", half);
-//         return half;
-//     }
-//     else if length ==1 && find != arr[half] 
-//     {
-//         return None;
-//     }
-//     else if arr[half] < find 
-//     {
-//         println!("in upper half {}",arr[half]);
-//         let upper_half = &arr[half .. length];
-//         find_index(upper_half, find)
-//     }
-//     else 
-//     {
-//         println!("in lower half {}",arr[half]);
-//         let lower_half = &arr[0 .. half ];
-//         find_index(lower_half, find)
-//     }
-// }
-
 fn find_index( arr: &[usize], find: usize) -> Option<usize> {
    let length = arr.len();
    let mut half = length / 2;
@@ -51,36 +21,46 @@ fn find_index( arr: &[usize], find: usize) -> Option<usize> {
    return None;
 }
 
+fn grab_array_index(my_arr : &[usize], find: usize) -> Option<usize>{ 
+    return my_arr.iter()
+    .position(|&x| x == find)
+}
+
 fn main() 
 {
-    fn grab_array_index(my_arr : &[usize], find: usize) -> usize{ 
-        return my_arr.iter()
-        .position(|&x| x == find)
-        .unwrap();
-    }
-
-    println!("sup bwords");
-    
     let mut arr = vec![1,2,3,4,5,6];
     let mut find = 3;
-    println!("Index of {} is {}", find , grab_array_index(&arr, find));
+
+    match grab_array_index(&arr, find) {
+        Some(p) => println!("index is {}", p),
+        None => println!("not in the array >:("),
+    }
     match find_index(&arr, find) {
-        Some(p) => println!("has value {}", p),
-        None => println!("nothing")
+        Some(p) => println!("Here ya go! {}", p),
+        None => println!("not in the array >:("),
     }
 
     arr = vec![1,3,5,7,9,11,13,15,17,19];
     find = 17;
-    println!("Index of {} is {}", find , grab_array_index(&arr, find));
-    match find_index(&arr, find) {
-        Some(p) => println!("has value {}", p),
-        None => println!("nothing")
+
+    match grab_array_index(&arr, find) {
+        Some(p) => println!("index is {}", p),
+        None => println!("not in the array >:("),
     }
-    arr = vec![1,3,5,7,9,11,13,15,17,19];
-    find = 17;
-    println!("Index of {} is {}", find , grab_array_index(&arr, find));
     match find_index(&arr, find) {
-        Some(p) => println!("has value {}", p),
-        None => println!("nothing")
+        Some(p) => println!("Here ya go! {}", p),
+        None => println!("not in the array >:("),
+    }
+
+    arr = vec![1,3,5,7,9,11,13,15,17,19];
+    find = 18;
+
+    match grab_array_index(&arr, find) {
+        Some(p) => println!("index is {}", p),
+        None => println!("not in the array >:("),
+    }
+    match find_index(&arr, find) {
+        Some(p) => println!("Here ya go! {}", p),
+        None => println!("not in the array >:("),
     }
 }
